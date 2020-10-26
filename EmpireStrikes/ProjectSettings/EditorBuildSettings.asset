@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes: []
   m_configObjects:
+<<<<<<< Updated upstream
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 088eb3f7074e7204995a9830a9a44d28, type: 2}
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 3618845b4a75ed544ad08644f8914974, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 1917e15d546ad1844b91f54ba7ff66d8, type: 2}
+=======
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4dd648f0041594e4da9dce31c3cf7b95, type: 2}
+    Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 3618845b4a75ed544ad08644f8914974, type: 2}
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 73fe02b9a3963334896174dbcba2b759, type: 2}
+>>>>>>> Stashed changes
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b491b0eacd3d23b48a919c01d15cbfe9, type: 2}
