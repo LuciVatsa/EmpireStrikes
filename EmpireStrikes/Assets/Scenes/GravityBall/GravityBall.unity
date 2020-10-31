@@ -6420,6 +6420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 371058114}
   - component: {fileID: 371058115}
+  - component: {fileID: 371058116}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -6457,6 +6458,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b103471873b5747e1865e430bb6ed455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &371058116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371058113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80619bbaa192301dfba844b0ed6e225c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 28280371}
+  frontButton: {fileID: 628868369}
+  backButton: {fileID: 1694645416}
+  leftButton: {fileID: 1772609045}
+  rightButton: {fileID: 1212162942}
+  highlightMaterial: {fileID: 2100000, guid: 82946de114f858ebc8477e6b721de265, type: 2}
 --- !u!1 &371485993
 GameObject:
   m_ObjectHideFlags: 0
@@ -9968,7 +9987,7 @@ GameObject:
   - component: {fileID: 628868368}
   - component: {fileID: 628868371}
   m_Layer: 0
-  m_Name: PosY
+  m_Name: PosY_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19523,7 +19542,7 @@ GameObject:
   - component: {fileID: 1212162941}
   - component: {fileID: 1212162944}
   m_Layer: 0
-  m_Name: PosY
+  m_Name: PosY_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25962,7 +25981,7 @@ GameObject:
   - component: {fileID: 1694645415}
   - component: {fileID: 1694645418}
   m_Layer: 0
-  m_Name: PosY
+  m_Name: PosY_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27117,7 +27136,7 @@ GameObject:
   - component: {fileID: 1772609044}
   - component: {fileID: 1772609047}
   m_Layer: 0
-  m_Name: PosY
+  m_Name: PosY_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
