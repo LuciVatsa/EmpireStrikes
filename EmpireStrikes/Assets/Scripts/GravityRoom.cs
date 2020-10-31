@@ -7,7 +7,7 @@ public class GravityRoom : MonoBehaviour {
     void Update() {
         float rotateX = 0f;
         float rotateZ = 0f;
-        float rotateSpeed = 1f;
+        float rotateSpeed = 30f;
 
         if (Input.GetKey(KeyCode.W)) {
             rotateX -= rotateSpeed;
@@ -22,8 +22,8 @@ public class GravityRoom : MonoBehaviour {
             rotateZ += rotateSpeed;
         }
 
-        transform.Rotate(Vector3.right, rotateX);
-        transform.Rotate(Vector3.forward, rotateZ);
+        transform.Rotate(Vector3.right, rotateX * Time.deltaTime);
+        transform.Rotate(Vector3.forward, rotateZ * Time.deltaTime);
     }
 }
 
