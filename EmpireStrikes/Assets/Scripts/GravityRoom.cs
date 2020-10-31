@@ -22,8 +22,8 @@ public class GravityRoom : MonoBehaviour {
             rotateZ += rotateSpeed;
         }
 
-        transform.Rotate(Vector3.right, rotateX * Time.deltaTime);
-        transform.Rotate(Vector3.forward, rotateZ * Time.deltaTime);
+        transform.Rotate(Vector3.right, rotateX * Time.deltaTime, Space.World);
+        transform.Rotate(Vector3.forward, rotateZ * Time.deltaTime, Space.World);
     }
 }
 
