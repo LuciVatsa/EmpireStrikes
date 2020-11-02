@@ -12,7 +12,10 @@ public class DoorScript : MonoBehaviour
     {
         isOpen = false;
     }
-
+    public bool getDoorStatus()
+    {
+        return isOpen;
+    }
     // Update is called once per frame
     void Update()
     {
