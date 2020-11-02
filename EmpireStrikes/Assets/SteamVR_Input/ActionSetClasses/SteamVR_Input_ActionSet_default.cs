@@ -105,8 +105,6 @@ namespace Valve.VR
             }
         }
         
-<<<<<<< Updated upstream
-=======
         public virtual SteamVR_Action_Vector2 TouchPad
         {
             get
@@ -115,7 +113,6 @@ namespace Valve.VR
             }
         }
         
->>>>>>> Stashed changes
         public virtual SteamVR_Action_Vibration Haptic
         {
             get
