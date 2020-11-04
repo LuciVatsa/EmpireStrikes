@@ -1,106 +1,97 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class GunInputAction : MonoBehaviour
 {
+    [Header("Components")]
+    public FireBullets fireBullets;
 
-    public SteamVR_Action_Boolean GunGrab;
-
-    public SteamVR_Action_Boolean GunShoot;
-
-    [SerializeField] private FireBullets fireBullets;
-
-
+    [Header("Steam VR")]
+    public SteamVR_Action_Boolean gunGrab;
+    public SteamVR_Action_Boolean gunShoot;
     public SteamVR_Input_Sources handType;
 
+    private bool _grabLastFrame = false;
+    private bool _canFire;
 
-    private bool GrabLastFrame = false;
-    private bool CanFire;
+    private Hand _refToHand = null;
 
-    private Hand RefToHand = null;
-    // Start is called before the first frame update
+    #region Unity Functions
+
     void Start()
     {
-        GunGrab.AddOnStateUpListener(TriggerUp, handType);
-        GunGrab.AddOnStateDownListener(TriggerDown, handType);
-        //GunShoot.AddOnUpdateListener(UpdateShoot, handType);
-        GunShoot.AddOnStateUpListener(ShootTriggerUp, handType);
-        GunShoot.AddOnStateDownListener(ShootTriggerDown, handType);
-    
-
+        gunGrab.AddOnStateUpListener(TriggerUp, handType);
+        gunGrab.AddOnStateDownListener(TriggerDown, handType);
+        gunShoot.AddOnStateUpListener(ShootTriggerUp, handType);
+        gunShoot.AddOnStateDownListener(ShootTriggerDown, handType);
     }
-
-    private void ShootTriggerDown(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
-    {
-        CanFire = true;
-    }
-
-    private void ShootTriggerUp(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
-    {
-        CanFire = false;
-    }
-
 
     private void LateUpdate()
     {
-        if (RefToHand&& CanFire)
+        if (_refToHand && _canFire)
         {
             fireBullets.Fire();
         }
     }
 
-    private void UpdateShoot(SteamVR_Action_Single fromaction, SteamVR_Input_Sources fromsource, float newaxis, float newdelta)
+    #endregion
+
+    #region Utility Functions
+
+    private void ShootTriggerDown(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
     {
-        if (RefToHand)
-        {
-            Debug.Log("fiiring"+ newaxis);
-        }
+        _canFire = true;
     }
 
-
-
-    // Update is called once per frame
-    void Update()
+    private void ShootTriggerUp(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
     {
+        _canFire = false;
+    }
 
+    private void UpdateShoot(SteamVR_Action_Single fromaction, SteamVR_Input_Sources fromsource, float newaxis, float newdelta)
+    {
+        if (_refToHand)
+        {
+            Debug.Log("fiiring" + newaxis);
+        }
     }
 
     protected virtual void HandHoverUpdate(Hand hand)
     {
-        if (GrabLastFrame)
+        if (_grabLastFrame)
         {
-            RefToHand = hand;
-            GrabLastFrame = false;
+            _refToHand = hand;
+            _grabLastFrame = false;
+
             hand.AttachObject(this.gameObject, GrabTypes.Scripted);
+
+            GameManager.Instance.StartGame();
         }
-
-
     }
 
-    void TriggerUp(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
+    private void TriggerUp(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
     {
-
-        GrabLastFrame = false;
+        _grabLastFrame = false;
     }
 
-    void TriggerDown(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
+    private void TriggerDown(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
     {
 
-        if (RefToHand)
+        if (_refToHand)
         {
-            RefToHand.DetachObject(this.gameObject);
-            RefToHand = null;
+            _refToHand.DetachObject(this.gameObject);
+            _refToHand = null;
+
+            GameManager.Instance.EndGame();
         }
         else
         {
-            
-            GrabLastFrame = true;
-        }
 
+            _grabLastFrame = true;
+        }
     }
+
+    #endregion
 
 }

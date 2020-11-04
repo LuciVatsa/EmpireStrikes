@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 public class FireBullets : MonoBehaviour
@@ -10,17 +8,21 @@ public class FireBullets : MonoBehaviour
     [SerializeField] private GameObject bullet;
 
     [Header("Data")]
-    public float launchVelocity = 10000;
+    public float launchVelocity = 100;
+    public float shootDelay = 0.4f;
 
     [Header("Recoil")]
     public TextAsset recoilFormat;
     public float recoilOffset;
+    public float recoilForce = 10;
     public float recoilResetTime;
 
     private List<RecoilOffset> _recoilOffsets;
     private Dictionary<int, Dictionary<int, char>> _recoilMatrix;
     private float _currentRecoilTime;
     private int _currentRecoilIndex;
+
+    private float _currentShootDelay;
 
     #region Unity Functions
 
@@ -46,6 +48,11 @@ public class FireBullets : MonoBehaviour
                 _currentRecoilIndex = 0;
             }
         }
+
+        if (_currentShootDelay > 0)
+        {
+            _currentShootDelay -= Time.deltaTime;
+        }
     }
 
     #endregion
@@ -54,6 +61,11 @@ public class FireBullets : MonoBehaviour
 
     public void Fire()
     {
+        if (_currentShootDelay > 0)
+        {
+            return;
+        }
+
         int recoilIndex = _currentRecoilIndex;
 
         _currentRecoilIndex += 1;
@@ -63,11 +75,16 @@ public class FireBullets : MonoBehaviour
         }
 
         Vector2 offset = _recoilOffsets[recoilIndex].offset;
-        Vector3 direction = transform.forward + new Vector3(offset.x * recoilOffset, offset.y * recoilOffset, 0);
+        Vector3 launchForce = transform.forward * launchVelocity
+                            + -transform.up * offset.x * recoilOffset * recoilForce +
+                            transform.right * offset.y * recoilOffset * recoilForce;
+
         _currentRecoilTime = recoilResetTime;
 
-        GameObject shot = GameObject.Instantiate(bullet, transform.position, transform.rotation);
-        shot.gameObject.GetComponent<Rigidbody>().AddForce(direction * launchVelocity);
+        GameObject shot = Instantiate(bullet, transform.position, transform.rotation);
+        shot.gameObject.GetComponent<Rigidbody>().AddForce(launchForce);
+
+        _currentShootDelay = shootDelay;
 
         Destroy(shot, 2);
     }
@@ -87,7 +104,7 @@ public class FireBullets : MonoBehaviour
         {
             var letter = recoilText[i];
 
-            if (!_recoilMatrix.ContainsKey(currentColumnIndex))
+            if (!_recoilMatrix.ContainsKey(currentRowIndex))
             {
                 Dictionary<int, char> dict = new Dictionary<int, char>();
                 _recoilMatrix.Add(currentRowIndex, dict);
