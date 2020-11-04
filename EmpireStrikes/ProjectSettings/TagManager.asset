@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+  - projectile
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -14,6 +16,8 @@ TagManager:
   - UI
   - 
   - 
+  - 
+  - Player
   - BulletLayer
   - 
   - 
