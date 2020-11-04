@@ -13,7 +13,7 @@ public class FireBullets : MonoBehaviour
 
     [Header("Data")]
     public float launchVelocity = 100;
-    public float shootDelay = 0.4f;
+    //public float shootDelay = 0.4f;
 
     [Header("Recoil")]
     public TextAsset recoilFormat;
@@ -25,8 +25,7 @@ public class FireBullets : MonoBehaviour
     private Dictionary<int, Dictionary<int, char>> _recoilMatrix;
     private float _currentRecoilTime;
     private int _currentRecoilIndex;
-
-    private float _currentShootDelay;
+    private float NextFire = 0.0f;
 
     #region Unity Functions
 
@@ -40,9 +39,7 @@ public class FireBullets : MonoBehaviour
 
         SaveRecoilOffsets(recoilFormat.text);
     }
-    private void Start()
-    { 
-    }
+   
     private void Update()
     {
         if (_currentRecoilTime > 0)
@@ -55,10 +52,7 @@ public class FireBullets : MonoBehaviour
             }
         }
 
-        if (_currentShootDelay > 0)
-        {
-            _currentShootDelay -= Time.deltaTime;
-        }
+     
     }
 
     #endregion
@@ -67,32 +61,36 @@ public class FireBullets : MonoBehaviour
 
     public void Fire()
     {
-        if (_currentShootDelay > 0)
+     
+
+
+        if (Time.time > NextFire)
         {
-            return;
+            NextFire = Time.time + fireRate;
+            audio.Play();
+
+            int recoilIndex = _currentRecoilIndex;
+
+            _currentRecoilIndex += 1;
+            if (_currentRecoilIndex >= _recoilOffsets.Count)
+            {
+                _currentRecoilIndex = _recoilOffsets.Count - 1;
+            }
+
+            Vector2 offset = _recoilOffsets[recoilIndex].offset;
+            Vector3 launchForce = transform.forward * launchVelocity
+                                  + -transform.up * offset.x * recoilOffset * recoilForce +
+                                  transform.right * offset.y * recoilOffset * recoilForce;
+
+            _currentRecoilTime = recoilResetTime;
+
+            GameObject shot = Instantiate(bullet, transform.position, transform.rotation);
+            shot.gameObject.GetComponent<Rigidbody>().AddForce(launchForce);
+
+
+            Destroy(shot, 5);
+
         }
-
-        int recoilIndex = _currentRecoilIndex;
-
-        _currentRecoilIndex += 1;
-        if (_currentRecoilIndex >= _recoilOffsets.Count)
-        {
-            _currentRecoilIndex = _recoilOffsets.Count - 1;
-        }
-
-        Vector2 offset = _recoilOffsets[recoilIndex].offset;
-        Vector3 launchForce = transform.forward * launchVelocity
-                            + -transform.up * offset.x * recoilOffset * recoilForce +
-                            transform.right * offset.y * recoilOffset * recoilForce;
-
-        _currentRecoilTime = recoilResetTime;
-
-        GameObject shot = Instantiate(bullet, transform.position, transform.rotation);
-        shot.gameObject.GetComponent<Rigidbody>().AddForce(launchForce);
-
-        _currentShootDelay = shootDelay;
-
-        Destroy(shot, 2);
     }
 
     #endregion
