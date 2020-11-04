@@ -9,11 +9,11 @@ public class FireBullets : MonoBehaviour
     [SerializeField] private float fireRate;
     [SerializeField] private AudioSource audio;
     [SerializeField] private Transform opTransform;
-    
+
 
     [Header("Data")]
     public float launchVelocity = 100;
-    //public float shootDelay = 0.4f;
+    public Vector3 rotationOffset;
 
     [Header("Recoil")]
     public TextAsset recoilFormat;
@@ -25,7 +25,7 @@ public class FireBullets : MonoBehaviour
     private Dictionary<int, Dictionary<int, char>> _recoilMatrix;
     private float _currentRecoilTime;
     private int _currentRecoilIndex;
-    private float NextFire = 0.0f;
+    private float _nextFire = 0.0f;
 
     #region Unity Functions
 
@@ -39,7 +39,7 @@ public class FireBullets : MonoBehaviour
 
         SaveRecoilOffsets(recoilFormat.text);
     }
-   
+
     private void Update()
     {
         if (_currentRecoilTime > 0)
@@ -51,8 +51,6 @@ public class FireBullets : MonoBehaviour
                 _currentRecoilIndex = 0;
             }
         }
-
-     
     }
 
     #endregion
@@ -61,12 +59,9 @@ public class FireBullets : MonoBehaviour
 
     public void Fire()
     {
-     
-
-
-        if (Time.time > NextFire)
+        if (Time.time > _nextFire)
         {
-            NextFire = Time.time + fireRate;
+            _nextFire = Time.time + fireRate;
             audio.Play();
 
             int recoilIndex = _currentRecoilIndex;
@@ -84,12 +79,11 @@ public class FireBullets : MonoBehaviour
 
             _currentRecoilTime = recoilResetTime;
 
-            GameObject shot = Instantiate(bullet, transform.position, transform.rotation);
+            Vector3 rotationAngle = Quaternion.LookRotation(launchForce + rotationOffset).eulerAngles;
+            GameObject shot = Instantiate(bullet, transform.position, Quaternion.Euler(rotationAngle));
             shot.gameObject.GetComponent<Rigidbody>().AddForce(launchForce);
 
-
             Destroy(shot, 5);
-
         }
     }
 
