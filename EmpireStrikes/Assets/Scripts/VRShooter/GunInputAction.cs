@@ -11,6 +11,7 @@ public class GunInputAction : MonoBehaviour
     public SteamVR_Action_Boolean gunGrab;
     public SteamVR_Action_Boolean gunShoot;
     public SteamVR_Input_Sources handType;
+    public SteamVR_Input_Sources handTypeForReload;
 
     private bool _grabLastFrame = false;
     private bool _canFire;

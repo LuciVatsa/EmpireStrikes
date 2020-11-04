@@ -6,6 +6,10 @@ public class FireBullets : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField] private GameObject bullet;
+    [SerializeField] private float fireRate;
+    [SerializeField] private AudioSource audio;
+    [SerializeField] private Transform opTransform;
+    
 
     [Header("Data")]
     public float launchVelocity = 100;
@@ -36,7 +40,9 @@ public class FireBullets : MonoBehaviour
 
         SaveRecoilOffsets(recoilFormat.text);
     }
-
+    private void Start()
+    { 
+    }
     private void Update()
     {
         if (_currentRecoilTime > 0)
