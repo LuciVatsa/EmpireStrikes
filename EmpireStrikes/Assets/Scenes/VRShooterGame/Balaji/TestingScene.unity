@@ -1010,9 +1010,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1612098736763880402, guid: 7ce43f479bc82494e885ffb8fbf7ea80, type: 3}
-  launchVelocity: 100
+  launchVelocity: 1000
+  shootDelay: 0.4
   recoilFormat: {fileID: 4900000, guid: 0120594fecb154a458cad8db1b721172, type: 3}
-  recoilOffset: 0.5
+  recoilOffset: 1
+  recoilForce: 100
   recoilResetTime: 1
 --- !u!1001 &1036948123
 PrefabInstance:
