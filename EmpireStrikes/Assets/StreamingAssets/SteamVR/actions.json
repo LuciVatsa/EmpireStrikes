@@ -95,6 +95,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/GunGrab/in/Reload",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/GunGrab/out/Haptic",
       "type": "vibration"
     }

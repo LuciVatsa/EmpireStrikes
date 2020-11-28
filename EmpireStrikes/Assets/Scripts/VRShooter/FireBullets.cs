@@ -26,6 +26,7 @@ public class FireBullets : MonoBehaviour
     private float _currentRecoilTime;
     private int _currentRecoilIndex;
     private float _nextFire = 0.0f;
+    private int BulletCount = 0;
 
     #region Unity Functions
 
@@ -57,10 +58,17 @@ public class FireBullets : MonoBehaviour
 
     #region External Functions
 
+    public void Reload(int count)
+    {
+        BulletCount = count;
+    }
+
     public void Fire()
     {
-        if (Time.time > _nextFire)
+       
+        if (Time.time > _nextFire && BulletCount>0)
         {
+            BulletCount--;
             _nextFire = Time.time + fireRate;
             audio.Play();
 

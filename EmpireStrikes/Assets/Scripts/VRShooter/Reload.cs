@@ -9,20 +9,21 @@ public class Reload : MonoBehaviour
 {
     public SteamVR_Action_Boolean GunReload;
 
-    [SerializeField] private GameObject reloadGameObject;
+    
 
     public SteamVR_Input_Sources handTypeForReload;
 
 
-    private bool GrabLastFrameForReload = false;
+    public bool GrabLastFrameForReload = false;
 
     private Hand RefToHandReload = null;
 
-    public bool IsReloading = false;
-
+    public bool HasAttached = false;
+    public int BulletCount;
 
     private void Start()
     {
+        BulletCount = 30;
         GunReload.AddOnStateUpListener(ReloadHold, handTypeForReload);
         GunReload.AddOnStateDownListener(ReloadRelease, handTypeForReload);
     }
@@ -34,7 +35,7 @@ public class Reload : MonoBehaviour
         {
             RefToHandReload = hand;
             GrabLastFrameForReload = false;
-            hand.AttachObject(reloadGameObject, GrabTypes.Scripted);
+            hand.AttachObject(this.gameObject, GrabTypes.Scripted);
         }
 
 
@@ -46,7 +47,7 @@ public class Reload : MonoBehaviour
         
         
             GrabLastFrameForReload = false;
-            IsReloading = false;
+           
 
     }
 
@@ -55,12 +56,12 @@ public class Reload : MonoBehaviour
 
         if (RefToHandReload )
         {
-            RefToHandReload.DetachObject(reloadGameObject);
+            RefToHandReload.DetachObject(this.gameObject);
             RefToHandReload = null;
         }
         else
         {
-            IsReloading = true;
+       
             GrabLastFrameForReload = true;
         }
     }

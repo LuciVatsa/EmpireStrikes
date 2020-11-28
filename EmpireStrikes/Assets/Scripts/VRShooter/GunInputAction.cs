@@ -12,11 +12,13 @@ public class GunInputAction : MonoBehaviour
     public SteamVR_Action_Boolean gunShoot;
     public SteamVR_Input_Sources handType;
     public SteamVR_Input_Sources handTypeForReload;
+    public GameObject magGameObject = null;
 
     private bool _grabLastFrame = false;
     private bool _canFire;
 
     private Hand _refToHand = null;
+    private bool HasMag = false;
 
     #region Unity Functions
 
@@ -30,7 +32,7 @@ public class GunInputAction : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_refToHand && _canFire)
+        if (_refToHand && _canFire && HasMag)
         {
             fireBullets.Fire();
         }
@@ -42,6 +44,7 @@ public class GunInputAction : MonoBehaviour
 
     private void ShootTriggerDown(SteamVR_Action_Boolean fromaction, SteamVR_Input_Sources fromsource)
     {
+        
         _canFire = true;
     }
 
@@ -50,13 +53,6 @@ public class GunInputAction : MonoBehaviour
         _canFire = false;
     }
 
-    private void UpdateShoot(SteamVR_Action_Single fromaction, SteamVR_Input_Sources fromsource, float newaxis, float newdelta)
-    {
-        if (_refToHand)
-        {
-            Debug.Log("fiiring" + newaxis);
-        }
-    }
 
     protected virtual void HandHoverUpdate(Hand hand)
     {
