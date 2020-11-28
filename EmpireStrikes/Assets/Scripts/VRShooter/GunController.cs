@@ -19,6 +19,7 @@ public class GunController : MonoBehaviour
     {
         if(other.CompareTag("Mag"))
         {
+           
             if (!other.GetComponent<Reload>().GrabLastFrameForReload)
             {
                 other.gameObject.transform.parent = this.gameObject.transform;
