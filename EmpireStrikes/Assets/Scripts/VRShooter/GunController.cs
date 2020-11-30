@@ -8,7 +8,7 @@ public class GunController : MonoBehaviour
 
     public GameObject gunGameObject;
     public FireBullets fireBulletsScript;
-    
+
     void Update()
     {
         this.transform.position = gunGameObject.transform.position;
@@ -17,20 +17,19 @@ public class GunController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Mag"))
-        {
-           
-            if (!other.GetComponent<Reload>().GrabLastFrameForReload)
-            {
-                other.gameObject.transform.parent = this.gameObject.transform;
-                if (!other.GetComponent<Reload>().HasAttached)
-                {
-                    fireBulletsScript.Reload(other.GetComponent<Reload>().BulletCount);
-                    other.GetComponent<Reload>().HasAttached = true;
-                }
+        //if (other.CompareTag("Mag"))
+        //{
+        //    if (!other.GetComponent<Reload>().GrabLastFrameForReload)
+        //    {
+        //        other.gameObject.transform.parent = this.gameObject.transform;
+        //        //if (!other.GetComponent<Reload>().HasAttached)
+        //        //{
+        //        //    fireBulletsScript.Reload(other.GetComponent<Reload>().BulletCount);
+        //        //    other.GetComponent<Reload>().HasAttached = true;
+        //        //}
 
-            }
-        }
+        //    }
+        //}
     }
 
     private void OnTriggerExit(Collider other)

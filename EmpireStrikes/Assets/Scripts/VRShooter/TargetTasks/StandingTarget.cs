@@ -12,7 +12,7 @@ public class StandingTarget : MonoBehaviour
     private float _startAngle;
     private float _targetAngle;
 
-    private StandingTargetController _targetController;
+    private TargetBaseController _targetController;
     private bool _isActive;
 
     #region Unity Functions
@@ -46,7 +46,7 @@ public class StandingTarget : MonoBehaviour
 
     #region External Functions
 
-    public void SetDefaults(StandingTargetController targetController)
+    public void SetDefaults(TargetBaseController targetController)
     {
         _targetController = targetController;
     }

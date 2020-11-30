@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StandingTargetController : MonoBehaviour
+public class StandingTargetController : TargetBaseController
 {
     public List<StandingTarget> targets;
-
-    private bool _isGameActive;
 
     #region Unity Functions
 
@@ -21,7 +19,7 @@ public class StandingTargetController : MonoBehaviour
 
     #region External Functions
 
-    public void RegisterTargetHit()
+    public override void RegisterTargetHit()
     {
         List<StandingTarget> validTargets = new List<StandingTarget>();
 
@@ -40,13 +38,13 @@ public class StandingTargetController : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public override void StartGame()
     {
         RegisterTargetHit();
         _isGameActive = true;
     }
 
-    public void EndGame()
+    public override void EndGame()
     {
         foreach (StandingTarget standingTarget in targets)
         {
@@ -55,8 +53,6 @@ public class StandingTargetController : MonoBehaviour
 
         _isGameActive = false;
     }
-
-    public bool IsGameActive => _isGameActive;
 
     #endregion
 }

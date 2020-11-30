@@ -99,6 +99,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/GunGrab/in/EndGame",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/GunGrab/out/Haptic",
       "type": "vibration"
     }
@@ -195,7 +199,8 @@
       "/actions/default/in/SnapTurnLeft": "Snap Turn (Left)",
       "/actions/default/in/SnapTurnRight": "Snap Turn (Right)",
       "/actions/GunGrab/in/Test Grab": "TestGrab",
-      "/actions/GunGrab/in/Shoot": "Shoot"
+      "/actions/GunGrab/in/Shoot": "Shoot",
+      "/actions/GunGrab/in/EndGame": "EndGame"
     }
   ]
 }

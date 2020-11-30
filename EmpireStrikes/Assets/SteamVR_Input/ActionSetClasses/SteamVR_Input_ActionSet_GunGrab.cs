@@ -41,6 +41,14 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean EndGame
+        {
+            get
+            {
+                return SteamVR_Actions.gunGrab_EndGame;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

@@ -26,7 +26,8 @@ public class FireBullets : MonoBehaviour
     private float _currentRecoilTime;
     private int _currentRecoilIndex;
     private float _nextFire = 0.0f;
-    private int BulletCount = 0;
+
+    private Reload _reload = null;
 
     #region Unity Functions
 
@@ -58,17 +59,20 @@ public class FireBullets : MonoBehaviour
 
     #region External Functions
 
-    public void Reload(int count)
+    public void AddMag(Reload reload)
     {
-        BulletCount = count;
+        _reload = reload;
     }
 
-    public void Fire()
+    public bool Fire()
     {
-       
-        if (Time.time > _nextFire && BulletCount>0)
+        if (_reload == null)
         {
-            BulletCount--;
+            return false;
+        }
+
+        if (Time.time > _nextFire && _reload != null && _reload.HasBullets())
+        {
             _nextFire = Time.time + fireRate;
             audio.Play();
 
@@ -92,7 +96,18 @@ public class FireBullets : MonoBehaviour
             shot.gameObject.GetComponent<Rigidbody>().AddForce(launchForce);
 
             Destroy(shot, 5);
+
+            _reload.UseBullet();
+            if (!_reload.HasBullets())
+            {
+                Destroy(_reload.gameObject);
+                _reload = null;
+
+                return false;
+            }
         }
+
+        return true;
     }
 
     #endregion
