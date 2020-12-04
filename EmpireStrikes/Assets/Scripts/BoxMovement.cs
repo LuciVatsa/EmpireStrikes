@@ -28,7 +28,7 @@ public class BoxMovement : MonoBehaviour
     // Move to the target end position.
     void Update()
     {
-        if (gameObject.activeInHierarchy) 
+        if (gameObject.activeSelf) 
         {
             // Distance moved equals elapsed time times speed..
             float distCovered = (Time.time - startTime) * speed;
