@@ -81,6 +81,10 @@
       "name": "/actions/mixedreality/in/ExternalCamera",
       "type": "pose",
       "requirement": "optional"
+    },
+    {
+      "name": "/actions/BowNArrow/in/SpawnBox",
+      "type": "boolean"
     }
   ],
   "action_sets": [
@@ -98,6 +102,10 @@
     },
     {
       "name": "/actions/mixedreality",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/BowNArrow",
       "usage": "single"
     }
   ],
