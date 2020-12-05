@@ -39,6 +39,8 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_SnapTurnRight;
         
+        private static SteamVR_Action_Vector2 p_default_TouchPad;
+        
         private static SteamVR_Action_Vibration p_default_Haptic;
         
         private static SteamVR_Action_Vector2 p_platformer_Move;
@@ -56,6 +58,12 @@ namespace Valve.VR
         private static SteamVR_Action_Pose p_mixedreality_ExternalCamera;
         
         private static SteamVR_Action_Boolean p_bowNArrow_SpawnBox;
+
+        private static SteamVR_Action_Boolean p_gunGrab_Test_Grab;
+        
+        private static SteamVR_Action_Boolean p_gunGrab_Shoot;
+        
+        private static SteamVR_Action_Vibration p_gunGrab_Haptic;
         
         public static SteamVR_Action_Boolean default_InteractUI
         {
@@ -145,6 +153,14 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Vector2 default_TouchPad
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_TouchPad.GetCopy<SteamVR_Action_Vector2>();
+            }
+        }
+        
         public static SteamVR_Action_Vibration default_Haptic
         {
             get
@@ -216,6 +232,30 @@ namespace Valve.VR
                 return SteamVR_Actions.p_bowNArrow_SpawnBox.GetCopy<SteamVR_Action_Boolean>();
             }
         }
+
+        public static SteamVR_Action_Boolean gunGrab_Test_Grab
+        {
+            get
+            {
+                return SteamVR_Actions.p_gunGrab_Test_Grab.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean gunGrab_Shoot
+        {
+            get
+            {
+                return SteamVR_Actions.p_gunGrab_Shoot.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Vibration gunGrab_Haptic
+        {
+            get
+            {
+                return SteamVR_Actions.p_gunGrab_Haptic.GetCopy<SteamVR_Action_Vibration>();
+            }
+        }
         
         private static void InitializeActionArrays()
         {
@@ -231,6 +271,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
+                    SteamVR_Actions.default_TouchPad,
                     SteamVR_Actions.default_Haptic,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
@@ -239,7 +280,10 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.mixedreality_ExternalCamera,
-                    SteamVR_Actions.bowNArrow_SpawnBox};
+                    SteamVR_Actions.bowNArrow_SpawnBox,
+                    SteamVR_Actions.gunGrab_Test_Grab,
+                    SteamVR_Actions.gunGrab_Shoot,
+                    SteamVR_Actions.gunGrab_Haptic};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_InteractUI,
                     SteamVR_Actions.default_Teleport,
@@ -252,6 +296,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
+                    SteamVR_Actions.default_TouchPad,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
@@ -259,11 +304,15 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.mixedreality_ExternalCamera,
-                    SteamVR_Actions.bowNArrow_SpawnBox};
+                    SteamVR_Actions.bowNArrow_SpawnBox,
+                    SteamVR_Actions.gunGrab_Test_Grab,
+                    SteamVR_Actions.gunGrab_Shoot};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
-                    SteamVR_Actions.default_Haptic};
+                    SteamVR_Actions.default_Haptic,
+                    SteamVR_Actions.gunGrab_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
-                    SteamVR_Actions.default_Haptic};
+                    SteamVR_Actions.default_Haptic,
+                    SteamVR_Actions.gunGrab_Haptic};
             Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[] {
                     SteamVR_Actions.default_Pose,
                     SteamVR_Actions.mixedreality_ExternalCamera};
@@ -278,11 +327,14 @@ namespace Valve.VR
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
-                    SteamVR_Actions.bowNArrow_SpawnBox};
+                    SteamVR_Actions.bowNArrow_SpawnBox,
+                    SteamVR_Actions.gunGrab_Test_Grab,
+                    SteamVR_Actions.gunGrab_Shoot};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     SteamVR_Actions.default_Squeeze,
                     SteamVR_Actions.buggy_Throttle};
             Valve.VR.SteamVR_Input.actionsVector2 = new Valve.VR.SteamVR_Action_Vector2[] {
+                    SteamVR_Actions.default_TouchPad,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.buggy_Steering};
             Valve.VR.SteamVR_Input.actionsVector3 = new Valve.VR.SteamVR_Action_Vector3[0];
@@ -298,13 +350,16 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
+                    SteamVR_Actions.default_TouchPad,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Steering,
                     SteamVR_Actions.buggy_Throttle,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
-                    SteamVR_Actions.bowNArrow_SpawnBox};
+                    SteamVR_Actions.bowNArrow_SpawnBox,
+                    SteamVR_Actions.gunGrab_Test_Grab,
+                    SteamVR_Actions.gunGrab_Shoot};
         }
         
         private static void PreInitActions()
@@ -320,6 +375,7 @@ namespace Valve.VR
             SteamVR_Actions.p_default_HeadsetOnHead = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/HeadsetOnHead")));
             SteamVR_Actions.p_default_SnapTurnLeft = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SnapTurnLeft")));
             SteamVR_Actions.p_default_SnapTurnRight = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SnapTurnRight")));
+            SteamVR_Actions.p_default_TouchPad = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/default/in/TouchPad")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
             SteamVR_Actions.p_platformer_Move = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/platformer/in/Move")));
             SteamVR_Actions.p_platformer_Jump = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/platformer/in/Jump")));
@@ -329,6 +385,9 @@ namespace Valve.VR
             SteamVR_Actions.p_buggy_Reset = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/buggy/in/Reset")));
             SteamVR_Actions.p_mixedreality_ExternalCamera = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/mixedreality/in/ExternalCamera")));
             SteamVR_Actions.p_bowNArrow_SpawnBox = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/BowNArrow/in/SpawnBox")));
+            SteamVR_Actions.p_gunGrab_Test_Grab = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/GunGrab/in/Test Grab")));
+            SteamVR_Actions.p_gunGrab_Shoot = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/GunGrab/in/Shoot")));
+            SteamVR_Actions.p_gunGrab_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/GunGrab/out/Haptic")));
         }
     }
 }
