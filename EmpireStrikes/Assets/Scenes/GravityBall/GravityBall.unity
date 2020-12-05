@@ -32499,6 +32499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504bc78075907be74b45043c2a358750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  negativeXText: {fileID: 2009051156}
+  positiveXText: {fileID: 973089620}
+  negativeZText: {fileID: 913573513}
+  positiveZText: {fileID: 697535848}
 --- !u!65 &2075123945
 BoxCollider:
   m_ObjectHideFlags: 0
