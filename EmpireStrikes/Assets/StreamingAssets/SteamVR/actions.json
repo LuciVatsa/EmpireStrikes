@@ -50,10 +50,6 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/TouchPad",
-      "type": "vector2"
-    },
-    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -89,18 +85,6 @@
     {
       "name": "/actions/BowNArrow/in/SpawnBox",
       "type": "boolean"
-    },
-    {
-      "name": "/actions/GunGrab/in/Test Grab",
-      "type": "boolean"
-    },
-    {
-      "name": "/actions/GunGrab/in/Shoot",
-      "type": "boolean"
-    },
-    {
-      "name": "/actions/GunGrab/out/Haptic",
-      "type": "vibration"
     }
   ],
   "action_sets": [
@@ -122,10 +106,6 @@
     },
     {
       "name": "/actions/BowNArrow",
-      "usage": "single"
-    },
-    {
-      "name": "/actions/GunGrab",
       "usage": "single"
     }
   ],
@@ -197,9 +177,7 @@
       "/actions/default/out/Haptic": "Haptic",
       "/actions/platformer/in/Jump": "Jump",
       "/actions/default/in/SnapTurnLeft": "Snap Turn (Left)",
-      "/actions/default/in/SnapTurnRight": "Snap Turn (Right)",
-      "/actions/GunGrab/in/Test Grab": "TestGrab",
-      "/actions/GunGrab/in/Shoot": "Shoot"
+      "/actions/default/in/SnapTurnRight": "Snap Turn (Right)"
     }
   ]
 }

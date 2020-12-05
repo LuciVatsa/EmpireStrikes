@@ -26,8 +26,6 @@ namespace Valve.VR
         private static SteamVR_Input_ActionSet_mixedreality p_mixedreality;
         
         private static SteamVR_Input_ActionSet_BowNArrow p_BowNArrow;
-
-        private static SteamVR_Input_ActionSet_GunGrab p_GunGrab;
         
         public static SteamVR_Input_ActionSet_default _default
         {
@@ -68,14 +66,6 @@ namespace Valve.VR
                 return SteamVR_Actions.p_BowNArrow.GetCopy<SteamVR_Input_ActionSet_BowNArrow>();
             }
         }
-
-        public static SteamVR_Input_ActionSet_GunGrab GunGrab
-        {
-            get
-            {
-                return SteamVR_Actions.p_GunGrab.GetCopy<SteamVR_Input_ActionSet_GunGrab>();
-            }
-        }
         
         private static void StartPreInitActionSets()
         {
@@ -84,14 +74,12 @@ namespace Valve.VR
             SteamVR_Actions.p_buggy = ((SteamVR_Input_ActionSet_buggy)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_buggy>("/actions/buggy")));
             SteamVR_Actions.p_mixedreality = ((SteamVR_Input_ActionSet_mixedreality)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_mixedreality>("/actions/mixedreality")));
             SteamVR_Actions.p_BowNArrow = ((SteamVR_Input_ActionSet_BowNArrow)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_BowNArrow>("/actions/BowNArrow")));
-            SteamVR_Actions.p_GunGrab = ((SteamVR_Input_ActionSet_GunGrab)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_GunGrab>("/actions/GunGrab")));
             Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[] {
                     SteamVR_Actions._default,
                     SteamVR_Actions.platformer,
                     SteamVR_Actions.buggy,
                     SteamVR_Actions.mixedreality,
-                    SteamVR_Actions.BowNArrow,
-                    SteamVR_Actions.GunGrab};
+                    SteamVR_Actions.BowNArrow};
         }
     }
 }
