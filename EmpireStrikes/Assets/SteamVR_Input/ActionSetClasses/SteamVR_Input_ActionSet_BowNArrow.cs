@@ -24,5 +24,13 @@ namespace Valve.VR
                 return SteamVR_Actions.bowNArrow_SpawnBox;
             }
         }
+        
+        public virtual SteamVR_Action_Boolean EndGame
+        {
+            get
+            {
+                return SteamVR_Actions.bowNArrow_EndGame;
+            }
+        }
     }
 }
