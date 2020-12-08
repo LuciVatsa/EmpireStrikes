@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -674,7 +674,7 @@ using UnityEngine;
 
 
 
-    public class VoronoiDiagram
+    public class VD
     {
 
         public readonly DelTri Triangulation;
@@ -690,7 +690,7 @@ using UnityEngine;
 
         public readonly List<int> FirstEdgeBySite;
 
-        internal VoronoiDiagram()
+        internal VD()
         {
             Triangulation = new DelTri();
             Sites = Triangulation.Vertices;
@@ -775,7 +775,7 @@ using UnityEngine;
         public Rigidbody Rigidbody { get; private set; }
 
         public List<Vector2> Polygon;
-        public float Thickness = 1.0f;
+
         public float MinBreakArea = 0.01f;
         public float MinImpactToBreak = 50.0f;
 
@@ -823,12 +823,12 @@ using UnityEngine;
                 Polygon.Add(new Vector2(scale.x, scale.y));
                 Polygon.Add(new Vector2(-scale.x, scale.y));
 
-                Thickness = 2.0f * scale.z;
+ 
 
                 transform.localScale = Vector3.one;
             }
 
-            var mesh = MeshFromPolygon(Polygon, Thickness);
+            var mesh = CreateMesh(Polygon, 2.0);
 
             Filter.sharedMesh = mesh;
             Collider.sharedMesh = mesh;
@@ -877,9 +877,6 @@ using UnityEngine;
                 PCmp cmp = new PCmp();
                 List<PT> pts = new List<PT>(); ;
                        
-
-                //var clip = new VoronoiClipper();
-
                 var sites = new Vector2[10];
 
                 for (int i = 0; i < sites.Length; i++)
@@ -893,12 +890,12 @@ using UnityEngine;
                 }
 
 
-                VoronoiDiagram diagram = null;
+                VD diagram = null;
 
 
                 if (diagram == null)
                 {
-                diagram = new VoronoiDiagram();
+                diagram = new VD();
                 }
 
                 var trig = diagram.Triangulation;
@@ -930,11 +927,6 @@ using UnityEngine;
                
                     Debug.Assert(GeomFuncs.ToTheLeft(p2, p0, p1));
 
-                    
-
-                                             
-
-
                     var mp0 = 0.5f * (p0 + p1);
                     var mp1 = 0.5f * (p1 + p2);
                     var v0 = (p0 - p1);
@@ -946,7 +938,6 @@ using UnityEngine;
                     var x1 = v1.x;
                     v1.x = -v1.y;
                     v1.y = x1;
-
 
                     float m0, m1;
 
@@ -1093,16 +1084,16 @@ using UnityEngine;
 
 
 
-                            edges.Add(new VoronoiDiagram.Edge(
-                                VoronoiDiagram.EdgeType.RayCCW,
+                            edges.Add(new VD.Edge(
+                                VD.EdgeType.RayCCW,
                                 ptCurr.Point,
                                 tiCurr / 3,
                                 -1,
                                 GeomFuncs.RotateRightAngle(v0)
                             ));
 
-                            edges.Add(new VoronoiDiagram.Edge(
-                                VoronoiDiagram.EdgeType.RayCW,
+                            edges.Add(new VD.Edge(
+                                VD.EdgeType.RayCW,
                                 ptCurr.Point,
                                 tiNext / 3,
                                 -1,
@@ -1114,8 +1105,8 @@ using UnityEngine;
 
                             if ((centers[tiCurr / 3] - centers[tiNext / 3]).magnitude >= 0.000001f)
                             {
-                                edges.Add(new VoronoiDiagram.Edge(
-                                    VoronoiDiagram.EdgeType.Segment,
+                                edges.Add(new VD.Edge(
+                                    VD.EdgeType.Segment,
                                     ptCurr.Point,
                                     tiCurr / 3,
                                     tiNext / 3,
@@ -1160,17 +1151,17 @@ using UnityEngine;
 
                         Vector2 lp, ld;
 
-                        if (edge.Type == VoronoiDiagram.EdgeType.RayCCW || edge.Type == VoronoiDiagram.EdgeType.RayCW)
+                        if (edge.Type == VD.EdgeType.RayCCW || edge.Type == VD.EdgeType.RayCW)
                         {
                             lp = diagram.Vertices[edge.Vert0];
                             ld = edge.Direction;
 
-                            if (edge.Type == VoronoiDiagram.EdgeType.RayCW)
+                            if (edge.Type == VD.EdgeType.RayCW)
                             {
                                 ld *= -1;
                             }
                         }
-                        else if (edge.Type == VoronoiDiagram.EdgeType.Segment)
+                        else if (edge.Type == VD.EdgeType.Segment)
                         {
                             var lp0 = diagram.Vertices[edge.Vert0];
                             var lp1 = diagram.Vertices[edge.Vert1];
@@ -1178,7 +1169,7 @@ using UnityEngine;
                             lp = lp0;
                             ld = lp1 - lp0;
                         }
-                        else if (edge.Type == VoronoiDiagram.EdgeType.Line)
+                        else if (edge.Type == VD.EdgeType.Line)
                         {
                             throw new NotSupportedException("");
                         }
@@ -1268,7 +1259,7 @@ using UnityEngine;
             }
         }
 
-        static Mesh MeshFromPolygon(List<Vector2> polygon, float thickness)
+        static Mesh CreateMesh(List<Vector2> polygon, float thickness)
         {
             var count = polygon.Count;
             
