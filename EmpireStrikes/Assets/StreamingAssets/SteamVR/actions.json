@@ -85,10 +85,6 @@
     {
       "name": "/actions/BowNArrow/in/SpawnBox",
       "type": "boolean"
-    },
-    {
-      "name": "/actions/BowNArrow/in/EndGame",
-      "type": "boolean"
     }
   ],
   "action_sets": [

@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Valve.VR;
 
 public class CubeSpawner : MonoBehaviour
 {
-    public int NumberOfTries = 20;
-
+    public int NumberOfTries = 0;
     public Transform[] StartPositions;
 
     public Transform[] EndPositions;
@@ -14,31 +12,18 @@ public class CubeSpawner : MonoBehaviour
 
     public GameObject CubetoSpawn;
 
-    // a reference to the action
-    public SteamVR_Action_Boolean RestartGame;
-    
-    // a reference to the hand
-    public SteamVR_Input_Sources handType;
-
     private void Start()
-    {
-        RestartGame.AddOnStateDownListener(Restart, handType);
-    }
-
-    public void Restart(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
     {
         StartCoroutine(Spawn(NumberOfTries));
     }
+
     IEnumerator Spawn(int NOfT)
     {
-        scoreHandler.GetComponent<ScoreManager>().Score = 0;
-
-        yield return new WaitForSeconds(5f);
-
         while (NOfT > 0)
         {
-            yield return new WaitForSeconds(1f);
-            var SpawnedCube = Instantiate(CubetoSpawn, gameObject.transform.position, gameObject.transform.rotation);
+            yield return new WaitForSeconds(4f);
+
+            var SpawnedCube = (GameObject)Instantiate(CubetoSpawn, gameObject.transform.position, gameObject.transform.rotation);
             SpawnedCube.AddComponent<BoxMovement>();
             SpawnedCube.AddComponent<CubeDestroyer>();
             SpawnedCube.AddComponent<ScoreManager>();
